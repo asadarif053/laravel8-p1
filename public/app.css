@@ -1,0 +1,19 @@
+
+body{
+    background: #fff;
+    color:#222;
+    width:600px; 
+    margin:auto;
+}
+
+article{
+    line-height: 1.6rem;
+    font-family: sans-serif;
+
+}
+
+article + article{
+    margin-top:20px;
+    border-top:1px solid #ddd;
+}
+
