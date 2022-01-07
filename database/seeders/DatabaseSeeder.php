@@ -17,69 +17,40 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        User::truncate();
-        Category::truncate();
-        Post::truncate();
-        //\App\Models\User::factory(10)->create();
-        $users = User::factory(2)->create();
+        $user = User::factory()->create([
+            'name' => "Asad Arif"
+        ]);
+        $user2 = User::factory()->create([
+            'name' => "John Doe"
+        ]);
 
-        $personal = Category::create([
-            'name'=>"Personal",
-            'slug'=>"personal"
+        $category = Category::factory()->create([
+            'name' => "Personal"
         ]);
-        $family = Category::create([
-            'name'=>"Family",
-            'slug'=>"family"
-        ]);
-        $hobbies = Category::create([
-            'name'=>"Hobbies",
-            'slug'=>"hobbies"
+        $category2 = Category::factory()->create([
+            'name' => "Travel"
         ]);
 
 
-        Post::create([
-            'category_id'=>$personal->id,
-            'user_id' => $users[0]->id,
-            'title'=> "My first Blog",
-            'slug'=> "my-first-blog",
-            'excerpt'=> "<p>exlka k aksdj laksjd akshdfk anslkd</p>",
-            'body'=> "<p>lor en i lkaj lkja sdlkjlkasjd flkasjdlfk jaslkdjf  aslkdk jflka sjlkja df</p>"
+
+        Post::factory(2)->create([
+            "user_id" => $user->id,
+            "category_id" => $category2->id,
         ]);
 
-        Post::create([
-            'category_id'=>$family->id,
-            'user_id' => $users[1]->id,
-            'title'=> "My Second Blog",
-            'slug'=> "my-second-blog",
-            'excerpt'=> "<p>exlka k aksdj----- laksjd akshdfk anslkd</p>",
-            'body'=> "<p>lor en i lkaj lkja sdlkjlkasjd flkasjdlfk jaslkdjf  aslkdk jflka sjlkja df</p>"
+        Post::factory(2)->create([
+            "user_id" => $user2->id,
+            "category_id" => $category->id,
         ]);
 
-        Post::create([
-            'category_id'=>$hobbies->id,
-            'user_id' => $users[0]->id,
-            'title'=> "My Third Blog",
-            'slug'=> "my-third-blog",
-            'excerpt'=> "<p><p>exlka k aksdj----99999- laksjd akshdfk anslkd</p>",
-            'body'=> "<p>lor en i lkaj lkja sdlkjlkasjd flkasjdlfk jaslkdjf  aslkdk jflka sjlkja df</p>"
+        Post::factory(1)->create([
+            "user_id" => $user2->id,
+            "category_id" => $category2->id,
         ]);
 
-        Post::create([
-            'category_id'=>$hobbies->id,
-            'user_id' => $users[0]->id,
-            'title'=> "My Fourth Blog",
-            'slug'=> "my-fourth-blog",
-            'excerpt'=> "<p>exlka k aksdj----99999- laksjd akshdfk anslkd",
-            'body'=> "<p>lor en i lkaj lkja sdlkjlkasjd flkasjdlfk jaslkdjf  aslkdk jflka sjlkja df</p>"
-        ]);
-
-        Post::create([
-            'category_id'=>$personal->id,
-            'user_id' => $users[1]->id,
-            'title'=> "My Fifth Blog",
-            'slug'=> "my-fifth-blog",
-            'excerpt'=> "<p>exlka k aksdj----99998889- laksjd akshdfk anslkd",
-            'body'=> "<p>lor en i lkaj lkja sdlkjlkasjd flkasjdlfk jaslkdjf  aslkdk jflka sjlkja df</p>"
+        Post::factory(1)->create([
+            "user_id" => $user->id,
+            "category_id" => $category->id,
         ]);
     }
 }
