@@ -41,5 +41,5 @@ Route::get('/post/{pm}', function ($slug) {
     
     return view('post',['post'=>$post]);
 
-})->where('pm','[A-z_\-]+');
+});
 
