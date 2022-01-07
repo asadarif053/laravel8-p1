@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Spatie\YamlFrontMatter\YamlFrontMatter; 
 
@@ -41,4 +42,10 @@ Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$sl
 Route::get('categories/{category:slug}', function (Category $category) {
     
     return view('posts',['posts'=>$category->posts]); //posts is a FUNCTION defined in Cateory Model
+});
+
+
+Route::get('users/{user}', function (User $user) {
+    
+    return view('posts',['posts'=>$user->posts]); //posts is a FUNCTION defined in Cateory Model
 });
