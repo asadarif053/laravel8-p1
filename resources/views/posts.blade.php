@@ -6,7 +6,8 @@
     <x-slot name="content"> 
     @foreach( $posts as $post)
     <article class="{{$loop->even?'even':'odd'}} {{$loop->first?' first':' '}} {{$loop->last?' last':'' }}">
-        <a href="/post/{{$post->slug}}">{{$post->title}}</a>
+       <p> <a href="/post/{{$post->slug}}">{{$post->title}}</a></p>
+        <a href="#"> {{ $post->category->name }}</a>
         <div>{!! $post->excerpt !!}</div>
     </article>
     @endforeach
