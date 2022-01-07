@@ -24,7 +24,9 @@ Route::get('/', function () {
         logger($query->sql, $query->bindings);
     });
     //$posts= Post::all();
-    $posts= Post::with('category')->get(); //fix n+1 issue
+
+    $posts= Post::latest('id')->with('category','author')->get();
+
     return view('posts',['posts'=>$posts]);
 });
 Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$slug)->firstOrFail();
@@ -45,7 +47,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
 });
 
 
-Route::get('users/{user}', function (User $user) {
+Route::get('author/{author:username}', function (User $author) {
     
-    return view('posts',['posts'=>$user->posts]); //posts is a FUNCTION defined in Cateory Model
+    return view('posts',['posts'=>$author->posts]); //posts is a FUNCTION defined in Cateory Model
 });
