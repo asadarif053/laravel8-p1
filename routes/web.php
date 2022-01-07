@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
+use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter; 
 
 /*
@@ -32,4 +33,7 @@ Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$sl
 
     return view('post',['post'=>$post]);
 });
-
+Route::get('categories/{category:slug}', function (Category $category) {
+    
+    return view('posts',['posts'=>$category->posts]); //posts is a FUNCTION defined in Cateory Model
+});
