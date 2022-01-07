@@ -43,11 +43,15 @@ Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$sl
 });
 Route::get('categories/{category:slug}', function (Category $category) {
     
-    return view('posts',['posts'=>$category->posts]); //posts is a FUNCTION defined in Cateory Model
+    return view('posts',[
+        'posts'=>$category->posts->load(['category','author']) //load method solved the n+1 
+    ]); 
 });
 
 
 Route::get('author/{author:username}', function (User $author) {
     
-    return view('posts',['posts'=>$author->posts]); //posts is a FUNCTION defined in Cateory Model
+    return view('posts',[
+        'posts'=>$author->posts->load(['category','author']) //load method solved the n+1 
+    ]); 
 });
