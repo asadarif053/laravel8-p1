@@ -17,29 +17,11 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-
-        // $posts =  array_map(function ($file){
-        //     $document = YamlFrontMatter::parseFile($file);
-        //     return new Post(
-        //         $document->title,
-        //         $document->excerpt,
-        //         $document->date,
-        //         $document->slug,
-        //         $document->body() 
-        //     );
-        // },$files);
-
-        $posts= Post::all();
-
+    $posts= Post::all();
     return view('posts',['posts'=>$posts]);
 });
-//Route::get('/test',[MainController::class,'testing']);
-Route::get('/post/{pm}', function ($slug) {
-    //return ["foo" => "bar"];
-    //
-    $post = Post::find($slug);
-    
+Route::get('/post/{id}', function ($id) {
+    $post = Post::find($id);  
     return view('post',['post'=>$post]);
-
 });
 
