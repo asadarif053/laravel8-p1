@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Spatie\YamlFrontMatter\YamlFrontMatter; 
 
 /*
@@ -18,7 +19,11 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-    $posts= Post::all();
+    DB::listen(function($query){
+        logger($query->sql, $query->bindings);
+    });
+    //$posts= Post::all();
+    $posts= Post::with('category')->get(); //fix n+1 issue
     return view('posts',['posts'=>$posts]);
 });
 Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$slug)->firstOrFail();
