@@ -20,8 +20,16 @@ Route::get('/', function () {
     $posts= Post::all();
     return view('posts',['posts'=>$posts]);
 });
-Route::get('/post/{id}', function ($id) {
-    $post = Post::find($id);  
+Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$slug)->firstOrFail();
+
+  //ROUTE-MODEL BINDING  
+    //1. /post/{post
+    //when you finding with the ID 
+    //wildcard name and parameter varible name must be same
+
+    //2./post/{post:slug}
+    //if wildcard is other than id, you must specify the field name with a colol : everyhting other remain same
+
     return view('post',['post'=>$post]);
 });
 

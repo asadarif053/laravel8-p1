@@ -11,4 +11,11 @@ class Post extends Model
 
     //protected $fillable=['title','excerpt','body'];
     protected $guarded=['id'];
+
+
+    /* set the default route key . by default it is id;
+    *public function getRouteKeyName()
+    {
+        return 'slug';
+    }*/
 }
