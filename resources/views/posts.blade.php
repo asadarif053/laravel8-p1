@@ -1,9 +1,6 @@
 <x-layout>
 
-<x-slot name="banner"> 
- <a href="/">Home</a>
-</x-slot>
-    <x-slot name="content"> 
+    <!-- <x-slot name="content"> 
     @foreach( $posts as $post)
     <article class="{{$loop->even?'even':'odd'}} {{$loop->first?' first':' '}} {{$loop->last?' last':'' }}">
        <p> <a href="/post/{{$post->slug}}">{{$post->title}}</a></p>
@@ -12,5 +9,20 @@
         <div>{!! $post->excerpt !!}</div>
     </article>
     @endforeach
-    </x-slot>
+    </x-slot> -->
+ 
+    @include ('_post-header')
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+
+    @if($posts->count())
+    <x-post-grid :posts="$posts" />
+
+    @else
+        <p> No posts available </p>
+    
+    @endif
+
+           
+        </main>
 </x-layout>
