@@ -27,7 +27,10 @@ Route::get('/', function () {
 
     $posts= Post::latest('id')->get();
 
-    return view('posts',['posts'=>$posts]);
+    return view('posts',[
+        'posts'=>$posts,
+        'categories'=>Category::all()
+        ]);
 });
 Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$slug)->firstOrFail();
 
