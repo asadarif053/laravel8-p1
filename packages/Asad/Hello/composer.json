@@ -1,0 +1,15 @@
+{
+    "name": "arif/hello",
+    "autoload": {
+        "psr-4": {
+            "Arif\\Hello\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Asaduzzaman",
+            "email": "asadarif053@gmail.com"
+        }
+    ],
+    "require": {}
+}
