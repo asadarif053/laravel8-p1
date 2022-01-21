@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -19,35 +20,14 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 |
 */
 
-Route::get('/', function () {
-    DB::listen(function($query){
-        logger($query->sql, $query->bindings);
-    });
-    //$posts= Post::all();
+Route::get('/', [PostController::class,'index']);
+Route::get('/post/{post:slug}',[PostController::class,'show']);
 
-    $posts= Post::latest('id')->get();
-
-    return view('posts',[
-        'posts'=>$posts,
-        'categories'=>Category::all()
-        ]);
-});
-Route::get('/post/{post:slug}', function (Post $post) { //Post::where('slug',$slug)->firstOrFail();
-
-  //ROUTE-MODEL BINDING  
-    //1. /post/{post
-    //when you finding with the ID 
-    //wildcard name and parameter varible name must be same
-
-    //2./post/{post:slug}
-    //if wildcard is other than id, you must specify the field name with a colol : everyhting other remain same
-
-    return view('post',['post'=>$post]);
-});
 Route::get('categories/{category:slug}', function (Category $category) {
     
     return view('posts',[
-        'posts'=>$category->posts
+        'posts'=>$category->posts,
+        'categories'=>Category::all()
     ]); 
 });
 
@@ -55,6 +35,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
 Route::get('author/{author:username}', function (User $author) {
     
     return view('posts',[
-        'posts'=>$author->posts
+        'posts'=>$author->posts,
+        'categories'=>Category::all()
     ]); 
 });
