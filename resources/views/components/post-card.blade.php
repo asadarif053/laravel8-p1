@@ -21,9 +21,9 @@
                             </div>
                         </header>
 
-                        <div class="text-sm mt-2">
+                        <div class="text-sm mt-2 space-y-4">
                             <p>
-                               {{$post->excerpt}}
+                               {!! $post->excerpt !!}
                             </p>
 
                            
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="hidden lg:block">
-                                <a href="post/{{$post->slug}}"
+                                <a href="/post/{{$post->slug}}"
                                    class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
                                 >Read More</a>
                             </div>
