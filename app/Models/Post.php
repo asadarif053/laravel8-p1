@@ -45,8 +45,17 @@ class Post extends Model
         });
 
         $query->when($filters['category']??false, function($query,$category){
+           
             $query
-            ->where('category_id','like',$category );
+            //->where('category_id',$category ); // using equal instead of like
+            ->whereExists(fn($query)=>  //category filter with callback function; EXIST command instead of JOIN
+                $query
+                    ->from('categories')
+                    ->whereColumn('categories.id','posts.category_id')
+                    ->where('categories.slug',$category)  // filter by category slug
+                   // ->where('categories.id',$category) //or simply filter with ID
+                    
+            );
         });
         
 
