@@ -43,6 +43,11 @@ class Post extends Model
             ->where('title','like', '%'.$search.'%')
             ->orWhere('body','like', '%'.$search.'%');
         });
+
+        $query->when($filters['category']??false, function($query,$category){
+            $query
+            ->where('category_id','like',$category );
+        });
         
 
     }
