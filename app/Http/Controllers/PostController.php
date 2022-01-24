@@ -10,9 +10,9 @@ class PostController extends Controller
 {
     public function index(){
         
-
+        //dd(request(['search']));
             return view('posts',[
-                'posts'=>Post::latest()->filter()->get(),
+                'posts'=>Post::latest()->filter(request(['search']))->get(),
                 'categories'=>Category::all()
                 ]);
     }

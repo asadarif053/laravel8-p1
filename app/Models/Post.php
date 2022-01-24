@@ -28,10 +28,22 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function scopeFilter($query){
-        $query
-            ->where('title','like', '%'.request('search').'%')
-            ->orWhere('body','like', '%'.request('search').'%');
+    public function scopeFilter($query, array $filters){
+        // the first argument will be passed by Laravel, and what I supply will be the second one
+        // if(isset($filters['search'])??false)
+        // $query
+        //     ->where('title','like', '%'.request('search').'%')
+        //     ->orWhere('body','like', '%'.request('search').'%');
+
+
+
+        //updated approch; the query builder, thus we canuse multiple filter here; 
+        $query->when($filters['search']??false, function($query,$search){
+            $query
+            ->where('title','like', '%'.$search.'%')
+            ->orWhere('body','like', '%'.$search.'%');
+        });
+        
 
     }
 }
