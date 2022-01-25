@@ -23,6 +23,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', [PostController::class,'index']);
 Route::get('/post/{post:slug}',[PostController::class,'show']);
 
+/*
 Route::get('categories/{category:slug}', function (Category $category) {
     
     return view('posts',[
@@ -30,7 +31,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
         'categories'=>Category::all()
     ]); 
 });
-
+*/
 
 Route::get('author/{author:username}', function (User $author) {
     

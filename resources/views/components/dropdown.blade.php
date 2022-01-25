@@ -1,15 +1,9 @@
-@props(['categories'])
 
-                {{--trigger--}}    
-                <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-                    <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold" id="categoryFilter">
-                        <option value="category" disabled selected>Category
-                        </option>                      
 
-                       @foreach($categories as $category)
-                       <option value="{{$category->slug}}" > {{ $category->name }}</option> 
-                       @endforeach
-                    </select>
+
+  
+<div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+<x-category-dropdown />
 
                     <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                          height="22" viewBox="0 0 22 22">
@@ -28,6 +22,7 @@
             <script type="text/javascript">
                 var catSel = document.getElementById("categoryFilter");
                 catSel.addEventListener("change", function(){
-                    location.href="/categories/"+catSel.value;
+                    location.href="?category="+catSel.value;
                 });
             </script>
+                
