@@ -33,10 +33,21 @@ Route::get('categories/{category:slug}', function (Category $category) {
 });
 */
 
+
 Route::get('author/{author:username}', function (User $author) {
     
-    return view('posts',[
+    return view('posts.index',[
         'posts'=>$author->posts,
         'categories'=>Category::all()
     ]); 
 });
+
+
+
+Route::get('/tre', function () {
+
+    return ["1"=>"adadf", "b"=>"dddd", "ddd"=>"3"];
+    });
+
+
+Route::get('/test', [PostController::class,'getPosts']);

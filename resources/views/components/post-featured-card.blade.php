@@ -33,7 +33,9 @@
                             <div class="flex items-center text-sm">
                                 <img src="/images/lary-avatar.svg" alt="Lary avatar">
                                 <div class="ml-3">
+                                <a href="author/{{$featurepost->author->username}}">
                                     <h5 class="font-bold">{{ $featurepost->author->name }}</h5>
+                                </a>
                                 </div>
                             </div>
 
