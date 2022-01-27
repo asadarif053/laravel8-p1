@@ -19,8 +19,28 @@ class PostController extends Controller
 
 
     public function show(Post $post){
-        return view('posts.show',['post'=>$post]);
+        return view('posts.view',['post'=>$post]);
     }
 
+    
 
+    protected function getPosts(){
+        
+        //no longer needed
+       // return Post::latest()->filter()->get();
+
+       $users = Post::first();
+    print_r($users);
+       return $users;
+
+
+        // $posts= Post::latest();
+
+        //     if(request('search')){
+        //         $posts->where('title','like', '%'.request('search').'%')
+        //             ->orWhere('body','like', '%'.request('search').'%');
+        //     }
+
+        // return $posts->get();    
+    }
 }
