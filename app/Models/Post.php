@@ -44,21 +44,9 @@ class Post extends Model
             ->orWhere('body','like', '%'.$search.'%');
         });
 
-        $query->when($filters['category']??false, function($query,$category){
-           
-            /*$query
-            //->where('category_id',$category ); // using equal instead of like
-            ->whereExists(fn($query)=>  //category filter with callback function; EXIST command instead of JOIN
-                $query
-                    ->from('categories')
-                    ->whereColumn('categories.id','posts.category_id')
-                    ->where('categories.slug',$category)  // filter by category slug
-                   // ->where('categories.id',$category) //or simply filter with ID
-                    
-            );*/
-
-            $query->whereHas('category', fn($query)=>
-            $query->where('slug',$category)
+        $query->when($filters['author']??false, function($query,$author){
+            $query->whereHas('author', fn($query)=>
+            $query->where('username',$author)
         );
 
 

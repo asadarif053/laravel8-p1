@@ -12,7 +12,7 @@ class PostController extends Controller
         
         //dd(request(['search']));
             return view('posts.index',[
-                'posts'=>Post::latest()->filter(request(['search','category']))->get(),
+                'posts'=>Post::latest()->filter(request(['search','category','author']))->get(),
                 //'categories'=>Category::all()
                 ]);
     }
@@ -22,25 +22,5 @@ class PostController extends Controller
         return view('posts.view',['post'=>$post]);
     }
 
-    
 
-    protected function getPosts(){
-        
-        //no longer needed
-       // return Post::latest()->filter()->get();
-
-       $users = Post::first();
-    print_r($users);
-       return $users;
-
-
-        // $posts= Post::latest();
-
-        //     if(request('search')){
-        //         $posts->where('title','like', '%'.request('search').'%')
-        //             ->orWhere('body','like', '%'.request('search').'%');
-        //     }
-
-        // return $posts->get();    
-    }
 }
