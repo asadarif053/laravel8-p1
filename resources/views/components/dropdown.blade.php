@@ -22,7 +22,7 @@
             <script type="text/javascript">
                 var catSel = document.getElementById("categoryFilter");
                 catSel.addEventListener("change", function(){
-                    location.href="?category="+catSel.value;
+                    location.href="?"+catSel.value;
                 });
             </script>
 
