@@ -38,13 +38,23 @@ class Post extends Model
 
 
         //updated approch; the query builder, thus we canuse multiple filter here; 
-        $query->when($filters['search']??false, function($query,$search){
-            $query
-            ->where('title','like', '%'.$search.'%')
-            ->orWhere('body','like', '%'.$search.'%');
+        $query->when($filters['search']??false, fn($query,$search)=>
+            $query->where(fn($query)=>
+                $query->where('title','like', '%'.$search.'%')
+                    ->orWhere('body','like', '%'.$search.'%')
+            )
+        );
+
+        $query->when($filters['category']??false, function($query,$category){
+       
+            $query->whereHas('category', fn($query)=>
+            $query->where('slug',$category)
+        );
         });
+        
 
         $query->when($filters['author']??false, function($query,$author){
+       
             $query->whereHas('author', fn($query)=>
             $query->where('username',$author)
         );

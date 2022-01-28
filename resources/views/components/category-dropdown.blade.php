@@ -3,6 +3,6 @@
         <option value="category" disabled selected >Category</option>                      
 
         @foreach($categories as $category)
-            <option value="{{$category->slug}}" <?=(isset($currentCategory->slug)&&$category->slug==$currentCategory->slug)? "selected":""?> > {{ $category->name }}</option> 
+            <option value="{{$category->slug}}& {{ http_build_query(request()->except('category')) }}" <?=(isset($currentCategory->slug)&&$category->slug==$currentCategory->slug)? "selected":""?> > {{ $category->name }}</option> 
         @endforeach
 </select>
