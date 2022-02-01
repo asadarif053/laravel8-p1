@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
     ];
 
@@ -41,9 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 
     public function posts()
     {
        return $this->hasMany(Post::class);
+    }
+
+    //accessor use to alters after db read 
+    public function getUsernameAttribute($usernmae){
+        return ucwords($usernmae);
+    }
+
+    //mutator use to alter before save
+    public function setPasswordAttribute($password){
+        $this->attributes['password']=bcrypt($password);
     }
 }

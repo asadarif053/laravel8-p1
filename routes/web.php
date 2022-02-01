@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -44,10 +45,8 @@ Route::get('author/{author:username}', function (User $author) {
 
 
 
-Route::get('/tre', function () {
-
-    return ["1"=>"adadf", "b"=>"dddd", "ddd"=>"3"];
-    });
+Route::get('/register', [RegisterController::class,'create'] );
+Route::post('/register', [RegisterController::class,'store'] );
 
 
 Route::get('/test', [PostController::class,'getPosts']);
