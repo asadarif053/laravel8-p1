@@ -28,10 +28,10 @@ class RegisterController extends Controller
         //dd($attributes);
        // $attributes['password']=bcrypt($attributes['password']);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+        auth()->login($user);
 
-
-        echo ' aucces';
+        return redirect('/')->with("success","Your account has been created successfully");
     }
 
 

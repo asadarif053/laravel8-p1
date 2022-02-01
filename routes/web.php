@@ -45,8 +45,8 @@ Route::get('author/{author:username}', function (User $author) {
 
 
 
-Route::get('/register', [RegisterController::class,'create'] );
-Route::post('/register', [RegisterController::class,'store'] );
+Route::get('/register', [RegisterController::class,'create'] )->middleware('guest');
+Route::post('/register', [RegisterController::class,'store'] )->middleware('guest');
 
 
 Route::get('/test', [PostController::class,'getPosts']);
