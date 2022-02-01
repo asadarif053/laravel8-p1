@@ -5,6 +5,7 @@ use App\Models\Post;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,10 @@ Route::get('author/{author:username}', function (User $author) {
 
 Route::get('/register', [RegisterController::class,'create'] )->middleware('guest');
 Route::post('/register', [RegisterController::class,'store'] )->middleware('guest');
+Route::post('/logout', [SessionController ::class,'destroy'] )->middleware('auth');
+Route::get('/login', [SessionController ::class,'create'] )->middleware('guest');
+Route::Post('/login', [SessionController ::class,'store'] )->middleware('guest');
+
 
 
 Route::get('/test', [PostController::class,'getPosts']);
