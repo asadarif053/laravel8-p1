@@ -29,12 +29,14 @@ class SessionController extends Controller
 
         //
 
-        if(auth()->attempt($attributes)){
-            return redirect('/')->with('success','Welcome Back!');
+        if(!auth()->attempt($attributes)){
+            return back()->withInput()->withErrors(['email'=>'your credetial is wrong']);   
         }
 
+        session()->regenerate();
+            return redirect('/')->with('success','Welcome Back!');
 
-        return back()->withInput()->withErrors(['email'=>'your credetial is wrong']);
+        
 
 
         

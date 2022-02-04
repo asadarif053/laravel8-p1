@@ -16,9 +16,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->sentence(),
             'excerpt' => "<p>".implode("</p><p>",$this->faker->paragraphs(2))."</p>",
-            'slug' => $this->faker->slug,
+            'slug' => $this->faker->slug(),
             'body' => "<p>".implode("</p><p>",$this->faker->paragraphs(6))."</p>",
             'user_id'=>User::factory(),
             'category_id'=>Category::factory() //$this->faker->numberBetween(1,2)

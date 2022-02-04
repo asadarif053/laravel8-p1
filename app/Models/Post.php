@@ -28,6 +28,11 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function comments()
+    {
+       return $this->hasMany(Comment::class);
+    }
+
     public function scopeFilter($query, array $filters){
         // the first argument will be passed by Laravel, and what I supply will be the second one
         // if(isset($filters['search'])??false)
