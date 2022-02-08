@@ -58,11 +58,11 @@ Route::Post('/login', [SessionController ::class,'store'] )->middleware('guest')
 
 
 Route::get('/test', [PostController::class,'getPosts']);
-Route::post('/newsletter',function(){
+Route::post('/newsletter',function( Newsletter $newsletter){
     request()->validate([
         'email'=>'required | email'
     ]);
-    (new Newsletter())->subscribe(request('email'));
+    $newsletter->subscribe(request('email'));
 
 return redirect('/');
 });
