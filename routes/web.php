@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -58,11 +59,6 @@ Route::Post('/login', [SessionController ::class,'store'] )->middleware('guest')
 
 
 Route::get('/test', [PostController::class,'getPosts']);
-Route::post('/newsletter',function( Newsletter $newsletter){
-    request()->validate([
-        'email'=>'required | email'
-    ]);
-    $newsletter->subscribe(request('email'));
 
-return redirect('/');
-});
+
+Route::post('/newsletter',NewsletterController::class);
