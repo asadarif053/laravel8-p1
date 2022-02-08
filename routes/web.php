@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Spatie\YamlFrontMatter\YamlFrontMatter; 
+use App\Services\Newsletter;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,16 +62,7 @@ Route::post('/newsletter',function(){
     request()->validate([
         'email'=>'required | email'
     ]);
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-$mailchimp->setConfig([
-	'apiKey' => config('services.mailchimp.key'),
-	'server' => 'us14']);
-
-$response = $mailchimp->lists->addListMember('25a9753dea',[
-    'email_address'=>request('email'),
-    "status" => "subscribed"
-]);
+    (new Newsletter())->subscribe(request('email'));
 
 return redirect('/');
 });
