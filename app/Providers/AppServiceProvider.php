@@ -18,10 +18,13 @@ class AppServiceProvider extends ServiceProvider
     {
         //container to store anything
         app()->bind(Newsletter::class,function(){
-            return new Newsletter(
-                new ApiClient(),
-                'foobar'
-            );
+
+            $client = (new ApiClient())->setConfig([
+                'apiKey' => config('services.mailchimp.key'),
+                'server' => 'us14']);
+
+            //instead of class new ApiClient() sending object created above   
+            return new Newsletter($client);
         });
     }
 
