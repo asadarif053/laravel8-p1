@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -24,6 +25,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', [PostController::class,'index']);
 Route::get('/post/{post:slug}',[PostController::class,'show']);
+Route::post('/posts/{post:slug}/comments',[PostCommentsController::class,'store']);
 
 /*
 Route::get('categories/{category:slug}', function (Category $category) {
@@ -55,3 +57,20 @@ Route::Post('/login', [SessionController ::class,'store'] )->middleware('guest')
 
 
 Route::get('/test', [PostController::class,'getPosts']);
+Route::post('/newsletter',function(){
+    request()->validate([
+        'email'=>'required | email'
+    ]);
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+$mailchimp->setConfig([
+	'apiKey' => config('services.mailchimp.key'),
+	'server' => 'us14']);
+
+$response = $mailchimp->lists->addListMember('25a9753dea',[
+    'email_address'=>request('email'),
+    "status" => "subscribed"
+]);
+
+return redirect('/');
+});
